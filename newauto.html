@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Ideal School Automation Control</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="static/css/main.css" />
+        <script src = "static/js/socket.io.js"></script>
+    </head>
+    <body id="top">
+        <!-- Header -->
+        <header id="header">
+            <p class="fa-2x">Welcome to Ideal School Automation Control!</p>
+            <p class="fa-2x">You can choose Automatic Mode or Manual Mode!</p>
+        </header>
+        <!-- Main -->                                                                 
+        <div id="main">
+            <!-- One -->
+            <section id="two">
+                <h4 class="align-center"><a href="/manual">Manual Mode</a></h4>
+                <div class="row"></div>
+                <ul class="actions">
+                    <li></li>
+                </ul>
+            </section>
+            <section class="align-center">
+                <h1><strong>Automatic Mode</strong></h1>
+            </section>
+            <!-- Two --><!-- Three -->
+            <section id="three">
+                <script>
+                    var socket = io.connect('http://192.168.0.39:85');
+                    
+                    var doStuff = function(){
+                    socket.emit('client_message', '{"request":0}');
+                    };
+                    setInterval(doStuff,2500)
+                    
+                    socket.on('server_light',function(data){
+                    console.log(data.light);
+                    $('#light').text(data.light);});
+                    socket.on('server_temp',function(data){
+                    console.log(data.temp);
+                    $('#temp').text(data.temp);
+                    
+                    
+                    });
+                    
+                    
+                </script>
+                <h1 class="fa-2x">Temperature: </h1>
+                <h1 class="fa-2x" id = "temp">&nbsp;   </h1>
+                <h1 class="fa-2x">Light intensity: </h1>
+                <h1 class="fa-2x" id = "light">&nbsp;    </h1>
+                <h1 class="fa-2x"><a href="/photo">View Photos</a></h1>
+                <h1 id = "temp">&nbsp;</h1>
+                <h1 id = "camera">&nbsp;</h1>
+                <div class="row">
+                    <div class="8u 12u$(small)">
+                        <form method="post" action="#">
+                            <div class="row uniform 50%">
+                                <div class="6u 12u$(xsmall)"></div>
+                                <div class="6u$ 12u$(xsmall)"></div>
+                                <div class="12u$"></div>
+                            </div>
+                        </form>
+                        <ul class="actions">
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="4u$ 12u$(small)"> </div>
+                </div>
+            </section>
+        </div>
+        <!-- Scripts -->
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/jquery.poptrox.min.js"></script>
+        <script src="static/js/skel.min.js"></script>
+        <script src="static/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="static/js/main.js"></script>
+    </body>
+</html>

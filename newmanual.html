@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Ideal School Automation Control</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="static/css/main.css" />
+        <script src="static/js/socket.io.js"></script>
+        <script src="static/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            //            
+            		
+                        
+        </script>
+    </head>
+    <body id="top">
+        <!-- Header -->
+        <header id="header">
+            <p class="fa-2x">Welcome to Ideal School Automation Control!</p>
+            <p class="fa-2x">You can choose Automatic Mode or Manual Mode!</p>
+        </header>
+        <!-- Main -->                                                                 
+        <div id="main">
+            <!-- One --><!-- Two -->
+            <section id="one" class="align-center">
+                <h4><a href="/automated">Automatic Mode</a></h4>
+            </section>
+            <section>
+            <section id="two">
+                <h1 class="align-center">Manual Mode</h1>
+                <h1 class="fa-2x">Temperature: </h1>
+                <h1 class="fa-2x" id = "temp">&nbsp;   </h1>
+                <h1 class="fa-2x">Light intensity: </h1>
+                <h1 class="fa-2x" id = "light">&nbsp;    </h1>
+                <h1 class="fa-2x">Last Capture:</h1>
+                <h1 class="fa-2x" id = "camera">&nbsp;   </h1>
+                <div class="row">
+                    <article class="6u 12u$(xsmall) work-item">
+                        <h3 class="align-center">LED lights</h3>
+                        <img src="static/thumbs/01.jpg" alt="" border="0" usemap="#Map" />
+                        <map name="Map">
+                            <area shape="rect" coords="6,9,174,205"  onclick="KeyStuff(111)">
+                            <area shape="rect" coords="188,9,364,203" onclick="KeyStuff(110)">
+                        </map>
+                        <p>&nbsp;</p>
+                    </article>
+                    <article class="6u$ 12u$(xsmall) work-item">
+                        <h3 class="align-center">Curtain 1</h3>
+                        <img src="static/thumbs/02.jpg" alt="" border="0" usemap="#Map2" />
+                        <map name="Map2">
+                            <area shape="rect" coords="8,12,172,202"
+                                onclick="KeyStuff(311)">
+                            <area shape="rect"
+                                coords="190,14,364,201"onclick="KeyStuff(310)" >
+                        </map>
+                        <p>&nbsp;</p>
+                    </article>
+                    <article class="6u 12u$(xsmall) work-item">
+                        <h3 class="align-center">Curtain 2</h3>
+                        <img src="static/thumbs/03.jpg" alt="" border="0" usemap="#Map3" />
+                        <map name="Map3">
+                            <area shape="rect" coords="5,6,174,207"
+                                onclick="KeyStuff(321)">
+                            <area shape="rect"
+                                coords="194,11,363,202"onclick="KeyStuff(320)" >
+                        </map>
+                        <p>&nbsp;</p>
+                    </article>
+                    <article class="6u$ 12u$(xsmall) work-item">
+                        <h3 class="align-center">Air con 1</h3>
+                        <img src="static/thumbs/04.jpg" alt="" border="0" usemap="#Map4" />
+                        <map name="Map4">
+                            <area shape="rect" coords="4,9,176,194" onclick="KeyStuff(211)">
+                            <area shape="rect" coords="202,15,359,193" onclick="KeyStuff(210)">
+                        </map>
+                        <p>&nbsp;</p>
+                    </article>
+                    <article class="6u 12u$(xsmall) work-item">
+                        <h3 class="align-center">Air con 2</h3>
+                        <img src="static/thumbs/05.jpg" alt="" border="0" usemap="#Map5" />
+                        <map name="Map5">
+                            <area shape="rect" coords="4,20,174,186" onclick="KeyStuff(221)">
+                            <area shape="rect" coords="194,26,356,199" onclick="KeyStuff(220)">
+                        </map>
+                        <p>&nbsp;</p>
+                    </article>
+                    <article class="6u$ 12u$(xsmall) work-item">
+                        <h3 class="align-center">Camera</h3>
+                        <img src="static/thumbs/06.jpg" alt="" border="0" usemap="#Map6" />
+                        <map name="Map6">
+                            <area shape="rect" coords="7,12,173,190" onclick="KeyStuff(411)">
+                            <area shape="rect" coords="188,18,356,199"
+                                href="/photo" >
+                        </map>
+                        <p>.</p>
+                    </article>
+                </div>
+                <ul class="actions">
+                    <li></li>
+                </ul>
+            </section>
+            <!-- Three -->
+            <section id="three">
+                <h2>&nbsp;</h2>
+                <p>&nbsp;</p>
+                <div class="row">
+                    <div class="8u 12u$(small)">
+                        <form method="post" action="#">
+                            <div class="row uniform 50%">
+                                <div class="6u 12u$(xsmall)"></div>
+                                <div class="6u$ 12u$(xsmall)"></div>
+                                <div class="12u$"></div>
+                            </div>
+                        </form>
+                        <ul class="actions">
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="4u$ 12u$(small)"> </div>
+                </div>
+            </section>
+        </div>
+        <!-- Scripts -->
+        <script src="static/js/jquery.poptrox.min.js"></script>
+        <script src="static/js/skel.min.js"></script>
+        <script src="static/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="static/js/main.js"></script>
+        <script>
+            var socket = io.connect('192.168.0.39:85');
+            function KeyStuff(x){
+            
+                 		socket.emit('client_message', '{"request":'+x+'}');
+            console.log("data keystuff");
+            }
+            var doStuff = function(){
+                 		socket.emit('client_message', '{"request":511}');
+                 		socket.emit('client_message', '{"request":521}');
+            console.log("data sent");
+                 		};
+            
+            
+            
+            
+            setInterval(doStuff,2500)
+            
+            socket.on('server_light',function(data){
+                 console.log(data.light);
+                 $('#light').text(data.light);});
+            socket.on('server_temp',function(data){
+                 console.log(data.temp);
+                 $('#temp').text(data.temp);
+            
+            
+            });
+            
+            socket.on('server_camera',function(data){
+                 console.log(data.camera);
+                 $('#camera').text(data.camera);});
+            
+        </script>
+    </body>
+</html>
